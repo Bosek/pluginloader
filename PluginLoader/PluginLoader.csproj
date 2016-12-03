@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.129\build\LibGit2Sharp.NativeBinaries.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -56,20 +56,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AlunaNetFramework">
-      <HintPath>IRAssemblies\AlunaNetFramework.dll</HintPath>
+      <HintPath>F:\Games\Steam\steamapps\common\Interstellar Rift\Build\AlunaNetFramework.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="IR">
-      <HintPath>IRAssemblies\IR.exe</HintPath>
+      <HintPath>F:\Games\Steam\steamapps\common\Interstellar Rift\Build\IR.exe</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="IronPython, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\IronPython.2.7.2\lib\Net40\IronPython.dll</HintPath>
+    <Reference Include="IronPython">
+      <HintPath>F:\Games\Steam\steamapps\common\Interstellar Rift\Build\IronPython.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="IronPython.Modules, Version=2.7.5.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\IronPython.2.7.2\lib\Net40\IronPython.Modules.dll</HintPath>
+    <Reference Include="IronPython.Modules">
+      <HintPath>F:\Games\Steam\steamapps\common\Interstellar Rift\Build\IronPython.Modules.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
@@ -81,12 +80,14 @@
       <HintPath>..\packages\IronPython.2.7.2\lib\Net40\Microsoft.Scripting.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NetSerializer">
-      <HintPath>IRAssemblies\NetSerializer.dll</HintPath>
+    <Reference Include="NetSerializer, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\Games\Steam\steamapps\common\Interstellar Rift\Build\NetSerializer.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>IRAssemblies\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\Games\Steam\steamapps\common\Interstellar Rift\Build\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -112,6 +113,8 @@
     <Compile Include="Modes\GameMode.cs" />
     <Compile Include="Modes\GameServer.cs" />
     <Compile Include="PackageManager\PackageManager.cs" />
+    <Compile Include="PackageManager\PluginClass.cs" />
+    <Compile Include="PackageManager\PluginGlobal.cs" />
     <Compile Include="Packets\ClientPackets.cs" />
     <Compile Include="Packets\ServerPackets.cs" />
     <Compile Include="PluginInjector.cs" />
@@ -647,7 +650,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent >
+    <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -659,6 +662,5 @@
   </Target>
   <Target Name="AfterBuild">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)Patcher\Resources\" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Interstellar Rift\Build\" Condition="'$(OS)' == 'Windows_NT' AND '$(ConfigurationName)' == 'Debug' " />
   </Target>
 </Project>
