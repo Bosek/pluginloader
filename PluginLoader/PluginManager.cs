@@ -254,35 +254,6 @@ namespace PluginLoader
                             InitCScriptPlugin(p, ref csProvider, ref csParams, ref csGlobal);
                         else
                             throw new InvalidOperationException("Missing or invalid PackageType in plugin.json");
-
-
-                        /*if(System.IO.File.Exists(p.Path + "\\__init__.py"))
-                            engine.ExecuteFile(p.Path + "\\__init__.py", scope);
-                        else if(System.IO.File.Exists(p.Path + "\\__init__.cs"))
-                        {
-                            CompilerResults results = csProvider.CompileAssemblyFromFile(csParams, p.Path + "\\__init__.cs");
-                            if(results.Errors.HasErrors)
-                            {
-                                System.Text.StringBuilder sbErrors = new System.Text.StringBuilder();
-                                foreach (CompilerError error in results.Errors)
-                                    sbErrors.AppendLine(String.Format("Error ({0}): {1}", error.ErrorNumber, error.ErrorText));
-
-                                throw new InvalidOperationException(sbErrors.ToString());
-                            }
-                            else
-                            {
-                                Type[] pluginTypes = results.CompiledAssembly.GetTypes().Where(t => t.IsSubclassOf(typeof(PluginClass))).ToArray();
-
-                                if (pluginTypes.Length == 0)
-                                    throw new InvalidOperationException(p.Path.Split('\\').Last() + " doesn't have an instance of PluginClass");
-                                else if (pluginTypes.Length > 1)
-                                    throw new InvalidOperationException(p.Path.Split('\\').Last() + " has more than 1 instance of PluginClass");
-
-                                PluginClass pluginInstance = (PluginClass)Activator.CreateInstance(pluginTypes[0], new Object[] { csGlobal });
-                                pluginInstance.PluginDir = p.Path;
-                                pluginInstance.Init();
-                            }
-                        }*/
                     }
                     catch(Exception ex)
                     {
