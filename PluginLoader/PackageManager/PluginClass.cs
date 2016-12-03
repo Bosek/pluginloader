@@ -7,18 +7,13 @@ using System.Threading.Tasks;
 namespace PluginLoader
 {
     public abstract class PluginClass
-    {
-        public readonly PluginGlobal Global;
-        
+    {        
         /// <summary>
         /// The path to the plugin directory
         /// </summary>
         public String PluginDir { get; internal set; }
 
-        public PluginClass(ref PluginGlobal Global)
-        {
-            this.Global = Global;
-        }
+        public PluginGlobal Global { get; internal set; }
 
         /// <summary>
         /// The main function of the plugin.

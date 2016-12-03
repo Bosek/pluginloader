@@ -310,8 +310,9 @@ namespace PluginLoader
                 else if (pluginTypes.Length > 1)
                     throw new InvalidOperationException(p.Path.Split('\\').Last() + " has more than 1 instance of PluginClass");
 
-                PluginClass pluginInstance = (PluginClass)Activator.CreateInstance(pluginTypes[0], new Object[] { csGlobal });
+                PluginClass pluginInstance = (PluginClass)Activator.CreateInstance(pluginTypes[0]);
                 pluginInstance.PluginDir = p.Path;
+                pluginInstance.Global = csGlobal;
                 pluginInstance.Init();
             }
         }
