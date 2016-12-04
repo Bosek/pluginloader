@@ -9,12 +9,12 @@
       The format is as follows:
    ```json
 {
-	"UniqueName": "[uniqueName]",
-	"PrettyName": "[prettyName]",
-	"Version": "[version]",
-	"PluginLoader": "[pluginLoaderVersion]",
-	"Dependencies": [],
-	"PackageType": "CScript"
+         "UniqueName": "[uniqueName]",
+         "PrettyName": "[prettyName]",
+         "Version": "[version]",
+         "PluginLoader": "[pluginLoaderVersion]",
+         "Dependencies": [],
+         "PackageType": "CScript"
 }
 ```
 
@@ -54,7 +54,7 @@
 
 
 
-* **__init__.cs**
+* **\_\_init\_\_.cs**
 
    The script file for the plugin.
    
