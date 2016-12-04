@@ -14,7 +14,7 @@
 	  "Version": "[version]",
 	  "PluginLoader": "[pluginLoaderVersion]",
 	  "Dependencies": [],
-	  "PackageType": "CScript"
+	  "PackageType": "Python"
 }
 ```
 
