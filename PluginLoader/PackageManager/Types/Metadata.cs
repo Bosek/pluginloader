@@ -5,6 +5,12 @@ using Newtonsoft.Json;
 
 namespace PluginLoader
 {
+    public enum PackageType
+    {
+        Lua,
+        Python,
+    }
+
     [Serializable]
     public struct Metadata
     {
@@ -17,12 +23,14 @@ namespace PluginLoader
         [JsonProperty(Required = Required.Always)]
         public string PrettyName;
         [JsonProperty(Required = Required.Always)]
+        public PackageType Type;
+        [JsonProperty(Required = Required.Always)]
         public string UniqueName;
         [JsonProperty(Required = Required.Always)]
         public SemVersion Version;
         public override string ToString()
         {
-            return $"{UniqueName} v{Version.ToString()}";
+            return $"{UniqueName} v{Version.ToString()} {Type.ToString().ToUpper()}";
         }
     }
 }

@@ -80,6 +80,10 @@
       <HintPath>..\packages\DynamicLanguageRuntime.1.1.2\lib\Net45\Microsoft.Scripting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MoonSharp.Interpreter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=921e73ce94aa17f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\MoonSharp.2.0.0.0\lib\net40-client\MoonSharp.Interpreter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NetSerializer">
       <HintPath>IRAssemblies\NetSerializer.dll</HintPath>
       <Private>False</Private>
@@ -119,6 +123,7 @@
     <Compile Include="Packets\ServerPackets.cs" />
     <Compile Include="PluginInjector.cs" />
     <Compile Include="PluginManager.cs" />
+    <Compile Include="ScriptRunner\Lua\LuaScriptRunner.cs" />
     <Compile Include="ScriptRunner\Python\PYErrorListener.cs" />
     <Compile Include="ScriptRunner\ScriptRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

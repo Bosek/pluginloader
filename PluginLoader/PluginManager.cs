@@ -106,7 +106,14 @@ namespace PluginLoader
                 PackageManager.Packages
                     .ForEach(package =>
                     {
-                        var scriptRunner = new PYScriptRunner();
+                        ScriptRunner scriptRunner = null;
+                        if (package.Metadata.Type == PackageType.Python)
+                            scriptRunner = new PYScriptRunner();
+                        else if (package.Metadata.Type == PackageType.Lua)
+                            scriptRunner = new LuaScriptRunner();
+                        else
+                            throw new NotImplementedException($"Package type not supported: {package.Metadata.Type.ToString()}");
+
                         var scriptGlobals = new ScriptGlobal
                         {
                             GameDirectory = PackageManager.GameDirectory,

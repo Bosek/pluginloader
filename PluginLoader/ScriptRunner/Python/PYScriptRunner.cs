@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PluginLoader
 {
-    class PYScriptRunner : ScriptRunner<ScriptEngine>
+    class PYScriptRunner : ScriptRunner
     {
         private static ScriptEngine engine = null;
 
@@ -13,7 +13,7 @@ namespace PluginLoader
 
         public override void CreateScope(ScriptGlobal scriptGlobal)
         {
-            scope = getEngine().Runtime.CreateScope();
+            scope = ((ScriptEngine)getEngine()).Runtime.CreateScope();
             scope.SetVariable("Global", scriptGlobal);
         }
 
@@ -22,7 +22,7 @@ namespace PluginLoader
             checkScope();
 
             var errorListener = new PYErrorListener();
-            var compiled = getEngine().CreateScriptSourceFromFile(fileName).Compile(errorListener);
+            var compiled = ((ScriptEngine)getEngine()).CreateScriptSourceFromFile(fileName).Compile(errorListener);
 
             if (errorListener.Errors.Any())
             {
@@ -35,7 +35,7 @@ namespace PluginLoader
             compiled.Execute(scope);
         }
 
-        protected override ScriptEngine getEngine()
+        protected override object getEngine()
         {
             if (engine == null)
                 engine = Python.CreateEngine();
