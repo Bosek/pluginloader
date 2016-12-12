@@ -1,30 +1,4 @@
-﻿#region Licence
-// Copyright (c) 2016 Tomas Bosek
-#pragma warning disable CC0065 // Remove trailing whitespace
-// 
-// This file is part of PluginLoader.
-#pragma warning disable CC0065 // Remove trailing whitespace
-// 
-// PluginLoader is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Affero General Public License as
-// published by the Free Software Foundation, either version 3 of the
-// License, or (at your option) any later version.
-#pragma warning disable CC0065 // Remove trailing whitespace
-// 
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Affero General Public License for more details.
-#pragma warning disable CC0065 // Remove trailing whitespace
-// 
-// You should have received a copy of the GNU Affero General Public License
-// along with this program. If not, see <http://www.gnu.org/licenses/>.
-#endregion
-using System;
-#pragma warning restore CC0065 // Remove trailing whitespace
-#pragma warning restore CC0065 // Remove trailing whitespace
-#pragma warning restore CC0065 // Remove trailing whitespace
-#pragma warning restore CC0065 // Remove trailing whitespace
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,42 +7,42 @@ namespace PluginLoader
 {
     public class PackageManager
     {
-        public string GameDir => AppDomain.CurrentDomain.BaseDirectory;
-        public string RootDir => Environment.ExpandEnvironmentVariables("%appdata%\\InterstellarRift\\plugins");
-
-        private List<Package> packages = new List<Package>();
-        public List<Package> Packages => packages;
-
-        internal void ScanForPackages()
+        public string GameDirectory { get; } = AppDomain.CurrentDomain.BaseDirectory;
+        public List<Package> Packages { get; private set; } = new List<Package>();
+        public string RootDirectory { get; } = Environment.ExpandEnvironmentVariables(@"%appdata%\InterstellarRift\plugins");
+        internal void LookForPackages()
         {
-            var dirs = Directory.GetDirectories(RootDir).ToList();
+            var directories = Directory.GetDirectories(RootDirectory).ToList();
 
-            foreach (string dir in dirs)
+            foreach (string directory in directories)
             {
-                var definition = Path.Combine(dir, "plugin.json");
-                var init = Path.Combine(dir, "__init__.py");
-                if (File.Exists(definition) && File.Exists(init))
+                try
                 {
-                    try
+                    var defFile = Path.Combine(directory, "plugin.json");
+                    var metadata = JsonSerializer.Deserialize<Metadata>(File.ReadAllText(defFile));
+                    var entryPointPath = Path.Combine(directory, metadata.EntryPoint);
+
+                    if (!File.Exists(entryPointPath))
+                        throw new FileNotFoundException(entryPointPath);
+
+                    Packages.Add(new Package
                     {
-                        packages.Add(new Package
-                        {
-                            Metadata = JsonSerializer.Deserialize<Metadata>(File.ReadAllText(definition)),
-                            Path = dir
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"[{nameof(PackageManager)}] Error loading module {Path.GetDirectoryName(init)}");
-                        Console.WriteLine(ex.Message);
-                    }
+                        Metadata = metadata,
+                        Path = directory
+                    });
+                }
+                catch (Exception exception)
+                {
+                    Log.Error($"Error loading content of {directory}");
+                    Log.Exception(exception);
+                    Log.Warning("Directory will be skipped");
                 }
             }
         }
 
         internal void Sort()
         {
-            packages = DependencySolver.Sort(packages.ToArray()).ToList();
+            Packages = DependencySolver.Sort(Packages.ToArray()).ToList();
         }
     }
 }
