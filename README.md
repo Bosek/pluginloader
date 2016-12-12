@@ -62,5 +62,7 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.  
----
+
+---  
+
 **AGPLv3 doesn't force you to release your mods under same licence. It just means that every custom modification(fork) of PL have to be released under AGPLv3 and distributed with source code.**
