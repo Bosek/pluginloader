@@ -1,4 +1,5 @@
-[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/IR-Plugin-Loader)
+**Please note that development is discontinued for now.**  
+Recent playtests led me to stop development. IR is under development and changes in it's code mean a lot of reworking for me everytime new release is out. I do believe I'll return once IR development is more "stable".
 
 ## Synopsis
 
@@ -6,20 +7,11 @@ PluginLoader adds support for IronPython plugins(mods) to [**Interstellar Rift**
 
 ## Game Version
 
-PL is supposed to run with latest Interstellar Rift version. Just keep in mind that both PL and IR are under heavy development. It might take a few days to add support for latest IR release.
+PL **does not** work properly with latest versions of IR. It might boot up and everything, but will probably cause server desyncs and lags.
 
 ## Modding
 
-Only server-side hooks(modding) work for now. Client-side is planned and will be in one of next releases. There are still some design decisions to be made.
-
-## Installation
-
-You can download online installer, which downloads and setups latest PL version, or manual installation archive, which just needs you to extract it into game directory.
-
-Starting from version **0.11.x**, PL has it's own launcher. You don't have to repatch after every IR update. Just run the game via our launcher :)
-
-NOTE: Only server-side modding is supported right now. You have to start the launcher with `-server` argument in order to boot-up properly.
-
+PL strives to provide server-side plugin support, to allow everyone customize their server and it's mechanics. You can create minigames, remote administrations, player statistics and much more!
 
 ## Adding plugins
 
